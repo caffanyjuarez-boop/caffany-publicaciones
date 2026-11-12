@@ -1,1 +1,5 @@
 *.wav
+salida/*_mudo.mp4
+salida/prev_*
+salida/log_*
+salida/campana.wav
