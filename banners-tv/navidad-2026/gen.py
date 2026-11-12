@@ -155,35 +155,38 @@ def recompensas():
 
 
 # ---------------------------------------------------------------- 2. MALVAVISCO
-CUPS = {"izq": (58, 1004, 460, 685), "der": (670, 1004, 460, 685), "cen": (314, 850, 560, 834)}
+# huecos para fotos (px a 1188x2110); en Canva se dividen entre 2
+HOT = {"cafe": (254, 552, 282, 420), "matcha": (652, 552, 282, 420)}
+CUPS = {"izq": (64, 1156, 380, 566), "der": (744, 1156, 380, 566), "cen": (364, 1037, 460, 685)}
 
 
 def malvavisco():
-    svg = snow_field(11, 18, (90, 70, W - 90, 700), CREMA, (0.07, 0.22))
-    svg += snow_field(13, 6, (90, 1760, W - 90, 1840), CREMA, (0.05, 0.14), 8, 20)
+    svg = snow_field(11, 18, (90, 70, W - 90, 520), CREMA, (0.07, 0.22))
+    svg += snow_field(13, 6, (90, 1790, W - 90, 1850), CREMA, (0.05, 0.14), 8, 20)
     svg += frame(CREMA, VINO)
-    # sombras de los vasos
-    for k, (x, y, w, h) in CUPS.items():
-        svg += f'<ellipse cx="{x + w / 2}" cy="{y + h - 18}" rx="{w * .36}" ry="{24 if k != "cen" else 30}" fill="url(#sombra)"/>'
+    for k, (x, y, w, h) in list(HOT.items()) + list(CUPS.items()):
+        svg += f'<ellipse cx="{x + w / 2}" cy="{y + h - 14}" rx="{w * .34}" ry="{18 if k in HOT else (28 if k == "cen" else 22)}" fill="url(#sombra)"/>'
     html = header(CREMA, "edición de invierno")
     html += f"""
-<div class="abs c" style="top:236px;font-family:Gloock;font-size:150px;line-height:1;color:{CREMA}">Malvavisco</div>
-<div class="abs c oro" style="top:384px;font-family:ISerif;font-style:italic;font-size:118px;line-height:1">tostado</div>
-<div class="abs c" style="top:540px;font-family:ISerif;font-size:40px;color:{CREMA};opacity:.8;line-height:1.3">un mismo antojo, tres maneras</div>"""
-    svg += rule_svg(620, 400, W - 400, CREMA, .45)
-    # etiquetas
-    labels = [("Frappé", 270), ("Café frío", 594), ("Matcha", 918)]
-    for name, cx in labels:
-        html += f'<div class="abs caps" style="top:1722px;left:{cx - 200}px;width:400px;text-align:center;font-size:30px;color:{CREMA}">{name}</div>'
-    svg += f'<line x1="430" y1="1740" x2="460" y2="1740" stroke="url(#oro)" stroke-width="2"/><line x1="728" y1="1740" x2="758" y2="1740" stroke="url(#oro)" stroke-width="2"/>'
+<div class="abs c" style="top:214px;font-family:Gloock;font-size:132px;line-height:1;color:{CREMA}">Malvavisco</div>
+<div class="abs c oro" style="top:344px;font-family:ISerif;font-style:italic;font-size:104px;line-height:1">tostado</div>"""
+    svg += rule_svg(478, 400, W - 400, CREMA, .45)
+    # fila caliente
+    html += f'<div class="abs c caps" style="top:506px;font-size:24px;color:{ORO_B};letter-spacing:.36em">calientes</div>'
+    svg += f'<line x1="330" y1="519" x2="470" y2="519" stroke="url(#oro)" stroke-width="1.5"/><line x1="718" y1="519" x2="858" y2="519" stroke="url(#oro)" stroke-width="1.5"/>'
+    for name, (x, y, w, h) in (("Café", HOT["cafe"]), ("Matcha", HOT["matcha"])):
+        html += f'<div class="abs caps" style="top:{y + h + 6}px;left:{x - 60}px;width:{w + 120}px;text-align:center;font-size:24px;color:{CREMA}">{name}</div>'
+    # fila fría
+    for name, cx in (("Frappé", 254), ("Café frío", 594), ("Matcha", 934)):
+        html += f'<div class="abs caps" style="top:1740px;left:{cx - 200}px;width:400px;text-align:center;font-size:28px;color:{CREMA}">{name}</div>'
     # sello de precio
-    cx, cy, R = 594, 1910, 120
-    svg += f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="url(#oro)"/><circle cx="{cx}" cy="{cy}" r="{R - 12}" fill="none" stroke="{VINO}" stroke-width="2" stroke-dasharray="3 7"/>'
+    cx, cy, R = 594, 1936, 98
+    svg += f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="url(#oro)"/><circle cx="{cx}" cy="{cy}" r="{R - 10}" fill="none" stroke="{VINO}" stroke-width="2" stroke-dasharray="3 7"/>'
     html += f"""
-<div class="abs" style="top:{cy - 74}px;left:{cx - 110}px;width:220px;text-align:center;font-family:Gloock;font-size:96px;line-height:1;color:{VINO}">$99</div>
-<div class="abs caps" style="top:{cy + 26}px;left:{cx - 110}px;width:220px;text-align:center;font-size:20px;color:{VINO};letter-spacing:.22em">c/u · 16 oz</div>
-<div class="abs" style="top:1872px;left:96px;width:330px;font-family:ISerif;font-style:italic;font-size:38px;line-height:1.15;color:{CREMA};opacity:.85;text-align:right">decorados a mano por nuestro equipo</div>
-<div class="abs caps" style="top:1878px;left:762px;width:330px;font-size:22px;line-height:1.8;color:{CREMA};opacity:.75;letter-spacing:.26em">sólo por<br>temporada</div>"""
+<div class="abs" style="top:{cy - 62}px;left:{cx - 100}px;width:200px;text-align:center;font-family:Gloock;font-size:80px;line-height:1;color:{VINO}">$99</div>
+<div class="abs caps" style="top:{cy + 22}px;left:{cx - 100}px;width:200px;text-align:center;font-size:18px;color:{VINO};letter-spacing:.2em">c/u · 16 oz</div>
+<div class="abs" style="top:1900px;left:96px;width:340px;font-family:ISerif;font-style:italic;font-size:36px;line-height:1.15;color:{CREMA};opacity:.85;text-align:right">decorados a mano por nuestro equipo</div>
+<div class="abs caps" style="top:1906px;left:752px;width:340px;font-size:21px;line-height:1.8;color:{CREMA};opacity:.75;letter-spacing:.26em">sólo por<br>temporada</div>"""
     return page(VINO, svg, html, grain=.12)
 
 
@@ -250,7 +253,8 @@ def refill():
     html += f"""
 <div class="abs" style="top:1640px;left:120px;width:430px">
   <div class="caps" style="font-size:24px;color:{VINO};letter-spacing:.26em">¿Más de 32 oz?</div>
-  <div style="font-family:ISerif;font-size:50px;line-height:1.1;color:{ink};margin-top:14px">Lo llenamos por +$15</div>
+  <div style="font-family:ISerif;font-size:50px;line-height:1.1;color:{ink};margin-top:14px">Lo llenamos por +$10</div>
+  <div style="font-family:ISerif;font-style:italic;font-size:36px;color:{VINO};margin-top:8px">máximo 40 oz</div>
 </div>
 <div class="abs" style="top:1640px;left:640px;width:430px">
   <div class="caps" style="font-size:24px;color:{VINO};letter-spacing:.26em">Por favor</div>
