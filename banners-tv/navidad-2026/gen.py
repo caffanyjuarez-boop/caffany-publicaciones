@@ -155,38 +155,44 @@ def recompensas():
 
 
 # ---------------------------------------------------------------- 2. MALVAVISCO
-# huecos para fotos (px a 1188x2110); en Canva se dividen entre 2
-HOT = {"cafe": (254, 552, 282, 420), "matcha": (652, 552, 282, 420)}
-CUPS = {"izq": (64, 1156, 380, 566), "der": (744, 1156, 380, 566), "cen": (364, 1037, 460, 685)}
+# retícula: 5 huecos iguales 320x476 (fotos 2:3, base del vaso al 94 %)
+CW, CH = 320, 476
+HOT = {"cafe": (240, 536, CW, CH), "matcha": (628, 536, CW, CH)}
+CUPS = {"izq": (70, 1134, CW, CH), "cen": (434, 1134, CW, CH), "der": (798, 1134, CW, CH)}
 
 
 def malvavisco():
     svg = snow_field(11, 18, (90, 70, W - 90, 520), CREMA, (0.07, 0.22))
-    svg += snow_field(13, 6, (90, 1790, W - 90, 1850), CREMA, (0.05, 0.14), 8, 20)
+    svg += snow_field(13, 6, (90, 1690, W - 90, 1760), CREMA, (0.05, 0.14), 8, 20)
     svg += frame(CREMA, VINO)
     for k, (x, y, w, h) in list(HOT.items()) + list(CUPS.items()):
-        svg += f'<ellipse cx="{x + w / 2}" cy="{y + h - 14}" rx="{w * .34}" ry="{18 if k in HOT else (28 if k == "cen" else 22)}" fill="url(#sombra)"/>'
+        svg += f'<ellipse cx="{x + w / 2}" cy="{y + h * .94}" rx="{w * .30}" ry="16" fill="url(#sombra)"/>'
     html = header(CREMA, "edición de invierno")
     html += f"""
 <div class="abs c" style="top:214px;font-family:Gloock;font-size:132px;line-height:1;color:{CREMA}">Malvavisco</div>
 <div class="abs c oro" style="top:344px;font-family:ISerif;font-style:italic;font-size:104px;line-height:1">tostado</div>"""
     svg += rule_svg(478, 400, W - 400, CREMA, .45)
-    # fila caliente
-    html += f'<div class="abs c caps" style="top:506px;font-size:24px;color:{ORO_B};letter-spacing:.36em">calientes</div>'
-    svg += f'<line x1="330" y1="519" x2="470" y2="519" stroke="url(#oro)" stroke-width="1.5"/><line x1="718" y1="519" x2="858" y2="519" stroke="url(#oro)" stroke-width="1.5"/>'
+
+    def tag(y, txt):
+        nonlocal svg, html
+        html += f'<div class="abs c caps" style="top:{y}px;font-size:24px;color:{ORO_B};letter-spacing:.36em">{txt}</div>'
+        svg += f'<line x1="330" y1="{y + 13}" x2="470" y2="{y + 13}" stroke="url(#oro)" stroke-width="1.5"/><line x1="718" y1="{y + 13}" x2="858" y2="{y + 13}" stroke="url(#oro)" stroke-width="1.5"/>'
+
+    tag(506, "calientes")
     for name, (x, y, w, h) in (("Café", HOT["cafe"]), ("Matcha", HOT["matcha"])):
-        html += f'<div class="abs caps" style="top:{y + h + 6}px;left:{x - 60}px;width:{w + 120}px;text-align:center;font-size:24px;color:{CREMA}">{name}</div>'
-    # fila fría
-    for name, cx in (("Frappé", 254), ("Café frío", 594), ("Matcha", 934)):
-        html += f'<div class="abs caps" style="top:1740px;left:{cx - 200}px;width:400px;text-align:center;font-size:28px;color:{CREMA}">{name}</div>'
-    # sello de precio
-    cx, cy, R = 594, 1936, 98
-    svg += f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="url(#oro)"/><circle cx="{cx}" cy="{cy}" r="{R - 10}" fill="none" stroke="{VINO}" stroke-width="2" stroke-dasharray="3 7"/>'
+        html += f'<div class="abs caps" style="top:{y + h * .94 + 18:.0f}px;left:{x - 40}px;width:{w + 80}px;text-align:center;font-size:26px;color:{CREMA}">{name}</div>'
+    tag(1088, "frías")
+    for name, k in (("Frappé", "izq"), ("Café frío", "cen"), ("Matcha", "der")):
+        x, y, w, h = CUPS[k]
+        html += f'<div class="abs caps" style="top:{y + h * .94 + 18:.0f}px;left:{x - 40}px;width:{w + 80}px;text-align:center;font-size:26px;color:{CREMA}">{name}</div>'
+    svg += rule_svg(1700, 420, W - 420, CREMA, .35, diamond=False)
+    cx, cy, R = 594, 1870, 104
+    svg += f'<circle cx="{cx}" cy="{cy}" r="{R}" fill="url(#oro)"/><circle cx="{cx}" cy="{cy}" r="{R - 11}" fill="none" stroke="{VINO}" stroke-width="2" stroke-dasharray="3 7"/>'
     html += f"""
-<div class="abs" style="top:{cy - 62}px;left:{cx - 100}px;width:200px;text-align:center;font-family:Gloock;font-size:80px;line-height:1;color:{VINO}">$99</div>
-<div class="abs caps" style="top:{cy + 22}px;left:{cx - 100}px;width:200px;text-align:center;font-size:18px;color:{VINO};letter-spacing:.2em">c/u · 16 oz</div>
-<div class="abs" style="top:1900px;left:96px;width:340px;font-family:ISerif;font-style:italic;font-size:36px;line-height:1.15;color:{CREMA};opacity:.85;text-align:right">decorados a mano por nuestro equipo</div>
-<div class="abs caps" style="top:1906px;left:752px;width:340px;font-size:21px;line-height:1.8;color:{CREMA};opacity:.75;letter-spacing:.26em">sólo por<br>temporada</div>"""
+<div class="abs" style="top:{cy - 66}px;left:{cx - 100}px;width:200px;text-align:center;font-family:Gloock;font-size:84px;line-height:1;color:{VINO}">$99</div>
+<div class="abs caps" style="top:{cy + 24}px;left:{cx - 100}px;width:200px;text-align:center;font-size:18px;color:{VINO};letter-spacing:.2em">c/u · 16 oz</div>
+<div class="abs" style="top:{cy - 42}px;left:96px;width:340px;font-family:ISerif;font-style:italic;font-size:36px;line-height:1.15;color:{CREMA};opacity:.85;text-align:right">decorados a mano por nuestro equipo</div>
+<div class="abs caps" style="top:{cy - 36}px;left:752px;width:340px;font-size:21px;line-height:1.8;color:{CREMA};opacity:.75;letter-spacing:.26em">sólo por<br>temporada</div>"""
     return page(VINO, svg, html, grain=.12)
 
 
