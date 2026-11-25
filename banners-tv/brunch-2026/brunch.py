@@ -38,8 +38,8 @@ def brunch():
   <div style="font-family:Gloock;font-size:68px;line-height:1.1;color:{ink};margin-top:10px">25 combos</div></div>
 <div class="abs c" style="top:1640px">
   <div style="display:inline-block;border:3px dashed rgba(14,42,31,.45);border-radius:18px;padding:18px 56px">
-    <div class="caps" style="font-size:22px;color:{VINO};letter-spacing:.3em">Pídelo en caja con el código</div>
-    <div style="font-family:Gloock;font-size:92px;line-height:1.05;color:{ink};letter-spacing:.04em">BRUNCH25</div></div></div>
+    <div class="caps" style="font-size:22px;color:{VINO};letter-spacing:.3em">Pídelo aquí mismo, solo di</div>
+    <div style="font-family:Gloock;font-size:84px;line-height:1.1;color:{ink};letter-spacing:0">“Quiero mi brunch”</div></div></div>
 <div class="abs c" style="top:1940px;font-family:ISerif;font-style:italic;font-size:42px;color:{ink};opacity:.85">
   y después de las 2 pm: <b style="font-style:normal;font-family:Gloock;font-weight:400;color:{VINO}">2x1</b> en café caliente</div>
 <div class="abs" style="top:{cy + r + 22}px;left:0;right:0;text-align:center;font-family:ISans;font-size:18px;color:{ink};opacity:.45">imagen ilustrativa</div>"""
