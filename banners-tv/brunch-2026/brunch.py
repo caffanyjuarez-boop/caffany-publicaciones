@@ -25,10 +25,13 @@ def brunch():
   transform:rotate(-8deg);box-shadow:0 16px 34px rgba(0,0,0,.35);border:4px solid #E9C877">
   <div style="font-family:Gloock;font-size:118px;line-height:.9"><span style="font-size:52px;vertical-align:48px">$</span>69</div>
   <div class="caps" style="font-size:20px;letter-spacing:.26em;margin-top:6px">el combo</div></div>
+<div class="abs c" style="top:556px;z-index:3"><span class="caps" style="display:inline-block;background:{VINO};color:{CREMA};
+  font-size:40px;letter-spacing:.3em;padding:18px 34px 18px 46px;border-radius:999px;border:3px solid #E9C877;
+  box-shadow:0 12px 28px rgba(0,0,0,.3)">Solo hoy</span></div>
 <div class="abs c" style="top:1250px;font-family:ISerif;font-size:54px;line-height:1.15;color:{ink};padding:0 120px">
   2 hotcakes con fresa, miel de agave<br>y un toque de Nutella <i style="color:{VINO}">+ capuchino caliente</i></div>
 <div class="abs" style="top:1450px;left:120px;width:430px;text-align:center">
-  <div class="caps" style="font-size:24px;color:{VINO};letter-spacing:.26em">Hoy</div>
+  <div class="caps" style="font-size:24px;color:{VINO};letter-spacing:.26em">Horario</div>
   <div style="font-family:Gloock;font-size:68px;line-height:1.1;color:{ink};margin-top:10px">9 am – 2 pm</div></div>
 <div class="abs" style="top:1450px;left:640px;width:430px;text-align:center">
   <div class="caps" style="font-size:24px;color:{VINO};letter-spacing:.26em">Solo</div>
