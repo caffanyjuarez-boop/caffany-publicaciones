@@ -4,12 +4,13 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen import *  # noqa
 
 LIMA = "#C9E34A"
+NEGRO = "#0D0D0C"   # dueño 27-nov: el verde se perdía con la pared y las teles verdes
 
 
 def kori():
     ink = CREMA
     svg = snow_field(53, 22, (90, 70, W - 90, 560), CREMA, (0.05, 0.14))
-    svg += frame(CREMA, PINO)
+    svg += frame(CREMA, NEGRO)
     cx, cy, r = W / 2, 930, 300
     svg += f'<circle cx="{cx}" cy="{cy}" r="{r + 16}" fill="none" stroke="url(#oro)" stroke-width="3"/>'
     svg += f'<circle cx="{cx}" cy="{cy}" r="{r + 30}" fill="none" stroke="{CREMA}" stroke-width="1" opacity=".35" stroke-dasharray="2 9"/>'
@@ -20,7 +21,7 @@ def kori():
     html += f"""
 <div class="abs c" style="top:226px;font-family:Gloock;font-size:150px;line-height:1;color:{ink}">Kori <span style="font-family:ISerif;font-style:italic;color:{LIMA}">Matcha</span></div>
 <div class="abs c" style="top:396px;font-family:ISerif;font-style:italic;font-size:76px;line-height:1;color:{ink};opacity:.92">hoy, aquí en Caffany</div>
-<div class="abs c" style="top:586px;z-index:3"><span class="caps" style="display:inline-block;background:{LIMA};color:{PINO};
+<div class="abs c" style="top:586px;z-index:3"><span class="caps" style="display:inline-block;background:{LIMA};color:{NEGRO};
   font-size:40px;letter-spacing:.3em;padding:18px 34px 18px 46px;border-radius:999px;border:3px solid #E9C877;
   box-shadow:0 12px 28px rgba(0,0,0,.35)">Solo hoy</span></div>
 <div class="abs" style="left:{cx - r}px;top:{cy - r}px;width:{2 * r}px;height:{2 * r}px;border-radius:50%;background:{CREMA};
@@ -51,7 +52,7 @@ def kori():
       <div style="font-family:Gloock;font-size:52px;line-height:1.1">@_korimatcha</div></div></div></div>
 <div class="abs c" style="top:1940px;font-family:ISerif;font-style:italic;font-size:42px;color:{ink};opacity:.85">
   pídelo en caja: <b style="font-style:normal;font-family:Gloock;font-weight:400;color:{LIMA}">“el combo Kori”</b></div>"""
-    return page(PINO, svg, html, grain=.14)
+    return page(NEGRO, svg, html, grain=.12)
 
 
 if __name__ == "__main__":
